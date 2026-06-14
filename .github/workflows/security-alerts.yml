@@ -24,3 +24,5 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python check_releases.py
+        env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"

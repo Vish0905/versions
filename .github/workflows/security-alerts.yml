@@ -5,9 +5,15 @@ on:
     - cron: '0 8 * * *' # Runs every single day at 08:00 AM UTC
   workflow_dispatch: # Allows you to trigger it manually via the UI
 
+# Global environment variables applied to all jobs and steps
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
+
 jobs:
   check-releases:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -24,7 +30,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python check_releases.py
-        env:
-           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
-           ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
-           
